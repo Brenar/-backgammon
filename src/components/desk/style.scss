@@ -10,6 +10,7 @@
   padding-bottom: 100px;
   background-color: rgb(165, 149, 130);
   border: 2px solid rgb(36, 36, 34);
+
   .deskAsideWhite {
     display: flex;
     height: 350px;
@@ -21,18 +22,22 @@
     border-radius: 10px;
     padding: 5px 15px 0 15px;
     border-bottom: 5px solid rgb(31, 31, 27);
+
     &:nth-child(2) {
       margin-bottom: 95px;
+
       .deskLine {
         flex-direction: column-reverse;
         padding-bottom: 2px;
       }
     }
+
     .deskSep {
       width: 5px;
       height: 100%;
       background-color: #000;
     }
+
     .deskLine {
       display: flex;
       flex-direction: column;
@@ -42,14 +47,36 @@
       background-color: rgb(192, 186, 160);
       border: 2px outset rgb(148, 147, 135);
       border-radius: 8px;
+
       .deskChecker {
         display: flex;
-        justify-content: center;
-        height: 18px;
         font-weight: 500;
+        border: 1px solid #333;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        justify-content: center;
+        align-items: center;
+        cursor:pointer;
+      }
+
+      .checker-white {
+        background-color: #ddd;
+        color: #111;
+      }
+
+      .checker-black {
+        background-color: #111;
+        color:#ddd;
+      }
+
+      .checker-active {
+        border-style: dashed;
+        opacity: 0.5;
       }
     }
   }
+
   .deskAsideBlack {
     display: flex;
     height: 350px;
@@ -61,18 +88,22 @@
     border-radius: 10px;
     padding: 5px 15px 0 15px;
     border-bottom: 5px solid rgb(31, 31, 27);
+
     &:nth-child(4) {
       margin-bottom: 95px;
+
       .deskLine {
         flex-direction: column-reverse;
         padding-bottom: 2px;
       }
     }
+
     .deskSep {
       width: 5px;
       height: 100%;
       background-color: #000;
     }
+
     .deskLine {
       display: flex;
       flex-direction: column;
@@ -82,12 +113,26 @@
       background-color: rgb(192, 186, 160);
       border: 2px outset rgb(148, 147, 135);
       border-radius: 8px;
+
       .deskChecker {
         display: flex;
-        justify-content: center;
-        height: 18px;
         font-weight: 500;
+        border: 1px solid #333;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        justify-content: center;
+        align-items: center;
       }
+
+      .checker-white {
+        background-color: #ddd;
+      }
+
+      .checker-black {
+        background-color: #111;
+      }
+
     }
   }
 }

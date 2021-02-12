@@ -159,9 +159,7 @@ export const blackDeskSelector = createSelector(
 export const blackScoreSelector = createSelector(stateSelector, (state) => {
   let count = 0
   state.deskForBlack.map((line) => {
-    line.map((point) => {
-      count = count + point
-    })
+    return line.map((point) => count = count + point)
   })
   return count
 })
@@ -169,9 +167,7 @@ export const blackScoreSelector = createSelector(stateSelector, (state) => {
 export const whiteScoreSelector = createSelector(stateSelector, (state) => {
   let count = 0
   state.deskForWhite.map((line) => {
-    line.map((point) => {
-      count = count + point
-    })
+    return line.map((point) => count = count + point)
   })
   return count
 })
