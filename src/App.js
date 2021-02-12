@@ -1,11 +1,14 @@
-import './App.css'
+import './App.scss'
+import { connect } from 'react-redux'
+import Desk from './components/desk'
+import { Route, Switch } from 'react-router-dom'
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <h1>Hello World!</h1>
-    </div>
+    <Switch>
+      <Route path="/game">
+        <Desk />
+      </Route>
+    </Switch>
   )
 }
-
-export default App

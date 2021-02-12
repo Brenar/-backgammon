@@ -1,3 +1,5 @@
 export const getRandomDices = () => {
-  // TODO return array with couple random number from 1 to 6
+  let arr = []
+  arr = [Math.round(Math.random() * 5 + 1), Math.round(Math.random() * 5 + 1)]
+  return arr
 }

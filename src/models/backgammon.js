@@ -22,24 +22,18 @@ export const GAME_OVER_SUCCESS = `${moduleName}/GAME_OVER_SUCCESS`
 
 export const ReducerRecord = {
   deskForBlack: [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
     [],
     [],
     [],
@@ -54,7 +48,6 @@ export const ReducerRecord = {
     [],
   ],
   deskForWhite: [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [],
     [],
     [],
@@ -67,12 +60,7 @@ export const ReducerRecord = {
     [],
     [],
     [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [],
     [],
     [],
@@ -85,7 +73,7 @@ export const ReducerRecord = {
     [],
     [],
   ],
-  points: [0, 0],
+  points: [2, 3],
   turn: 'black', // or white
 }
 
@@ -132,12 +120,62 @@ export default function reducer(state = ReducerRecord, action) {
 export const stateSelector = (state) => state[moduleName]
 export const whiteDeskSelector = createSelector(
   stateSelector,
-  (state) => state.deskForBlack
+  (state) => {
+    const result = []
+    const whiteDesk = state.deskForWhite
+    const blackDesk = state.deskForBlack
+
+    whiteDesk.map((whiteLine, whiteKey) => {
+      let blackTemp = []
+      blackDesk.map((blackLine, blackKey) => {       
+        if (whiteKey === blackKey) {
+          blackTemp = blackLine
+        }
+      })
+      result.push(whiteLine.concat(blackTemp))
+    })
+    return result
+  } 
 )
 export const blackDeskSelector = createSelector(
   stateSelector,
-  (state) => state.deskForWhite
+  (state) => {
+    const result = []
+    const whiteDesk = state.deskForWhite
+    const blackDesk = state.deskForBlack
+
+    blackDesk.map((blackLine, blackKey) => {
+      let whiteTemp = []
+      whiteDesk.map((whiteLine, whiteKey) => {       
+        if (blackKey === whiteKey) {
+          whiteTemp = whiteLine
+        }
+      })
+      result.push(blackLine.concat(whiteTemp))
+    })
+    return result
+  } 
 )
+export const blackScoreSelector = createSelector(stateSelector, (state) => {
+  let count = 0
+  state.deskForBlack.map((line) => {
+    line.map((point) => {
+      count = count + point
+    })
+  })
+  return count
+})
+
+export const whiteScoreSelector = createSelector(stateSelector, (state) => {
+  let count = 0
+  state.deskForWhite.map((line) => {
+    line.map((point) => {
+      count = count + point
+    })
+  })
+  return count
+})
+
 export const turnSelector = createSelector(stateSelector, (state) => state.turn)
 export const pointsSelector = createSelector(
   stateSelector,
@@ -148,7 +186,7 @@ export const pointsSelector = createSelector(
  * Action Creators
  * */
 
-export const initStartGame = () => ({
+export const initStartGame = () => (dispatch, getState) => ({
   type: GAME_START,
 })
 
@@ -157,10 +195,18 @@ export const handleRollTheDices = () => ({
   payload: getRandomDices(),
 })
 
-export const handleMoveChecker = (desk) => ({
-  type: MOVE_CHECKER_REQUEST,
-  payload: desk,
-})
+// export const handleMoveChecker = (desk) => ({
+//   type: MOVE_CHECKER_REQUEST,
+//   payload: desk,
+// })
+
+export const handleMoveChecker = (desk) => (dispatch, getState) => {
+
+  dispatch({
+    type: MOVE_CHECKER_REQUEST,
+    payload: desk
+  })
+}
 
 export const handleChangeTurn = () => ({
   type: CHANGE_TURN_REQUEST,
