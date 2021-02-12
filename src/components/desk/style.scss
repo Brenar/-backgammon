@@ -1,0 +1,93 @@
+.Desk {
+  display: flex;
+  height: 1650px;
+  width: 1000px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 100px;
+  background-color: rgb(165, 149, 130);
+  border: 2px solid rgb(36, 36, 34);
+  .deskAsideWhite {
+    display: flex;
+    height: 350px;
+    width: 600px;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgba(189, 192, 149, 0.521);
+    border: 2px solid rgb(95, 95, 84);
+    border-radius: 10px;
+    padding: 5px 15px 0 15px;
+    border-bottom: 5px solid rgb(31, 31, 27);
+    &:nth-child(2) {
+      margin-bottom: 95px;
+      .deskLine {
+        flex-direction: column-reverse;
+        padding-bottom: 2px;
+      }
+    }
+    .deskSep {
+      width: 5px;
+      height: 100%;
+      background-color: #000;
+    }
+    .deskLine {
+      display: flex;
+      flex-direction: column;
+      height: 320px;
+      width: 20px;
+      margin: 10px;
+      background-color: rgb(192, 186, 160);
+      border: 2px outset rgb(148, 147, 135);
+      border-radius: 8px;
+      .deskChecker {
+        display: flex;
+        justify-content: center;
+        height: 18px;
+        font-weight: 500;
+      }
+    }
+  }
+  .deskAsideBlack {
+    display: flex;
+    height: 350px;
+    width: 600px;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgba(189, 192, 149, 0.521);
+    border: 2px solid rgb(95, 95, 84);
+    border-radius: 10px;
+    padding: 5px 15px 0 15px;
+    border-bottom: 5px solid rgb(31, 31, 27);
+    &:nth-child(4) {
+      margin-bottom: 95px;
+      .deskLine {
+        flex-direction: column-reverse;
+        padding-bottom: 2px;
+      }
+    }
+    .deskSep {
+      width: 5px;
+      height: 100%;
+      background-color: #000;
+    }
+    .deskLine {
+      display: flex;
+      flex-direction: column;
+      height: 320px;
+      width: 20px;
+      margin: 10px;
+      background-color: rgb(192, 186, 160);
+      border: 2px outset rgb(148, 147, 135);
+      border-radius: 8px;
+      .deskChecker {
+        display: flex;
+        justify-content: center;
+        height: 18px;
+        font-weight: 500;
+      }
+    }
+  }
+}
