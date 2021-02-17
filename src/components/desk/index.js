@@ -2,6 +2,7 @@ import {connect} from 'react-redux'
 import React, {useState} from 'react'
 import './style.scss'
 import classNames from 'classnames'
+import deskAside from '../desk-aside'
 
 import {
   whiteDeskSelector,
@@ -29,16 +30,80 @@ const deskSeparator = (desk) => {
   return [firstDesk, secondDesk]
 }
 
+
 export function Desk(props) {
   const {whiteDesk, blackDesk, blackScore, whiteScore, points, turn} = props
 
   const [activeChecker, setActiveChecker] = useState(null)
+  const [activeLines, setActiveLines] = useState([])
 
   return (
     <div className="Desk">
       {deskSeparator(whiteDesk).map((aside, asideKey) => {
         return (
-          <div key={asideKey} className="deskAsideWhite">
+          <div key={asideKey} className="deskAsideWhite" deskAside={aside} {...props}>
+            {aside.map((line, key) => {
+              const separator = key === 6 ? <div className="deskSep"/> : null
+              let handleCheckChecker = () => false
+              const activeLineId = ((key + 1) * (asideKey)) + 12
+              if (line[0] === 1 && turn === 'white') {
+                handleCheckChecker = () => {
+                  setActiveChecker(activeLineId)
+                  let lines = []
+                  if(points.length === 2) {
+                    if(blackDesk[points[0] + activeLineId - 1].length == 0) {
+                      lines.push(points[0] + activeLineId)
+                    }
+                    if(blackDesk[points[1] + activeLineId - 1].length == 0) {
+                      lines.push(points[1] + activeLineId)
+
+                    }
+                    if(blackDesk[points[0] + points[1] + activeLineId - 1].length == 0 && lines.length !== 0) {
+                      lines.push(points[0] + points[1] + activeLineId)
+
+                    }
+                    setActiveLines(lines)
+                    console.log(activeLines.includes((((key + 1) * (asideKey)) + 12)))
+                  }
+                }
+              }
+              if (line[0] === 0 && turn === 'black') {
+                handleCheckChecker = () => setActiveChecker(activeLineId)
+              }
+              const lineClasses = classNames({
+                'deskLine': true,
+                'line-active': activeLines.includes((((key + 1) * (asideKey)) + 12))
+              })
+              
+              return (
+                <span key={key}>
+                {separator}
+                  <div className={lineClasses} onClick={handleCheckChecker}>
+                    {line.map((checker, checkKey) => {
+                      const checkerClasses = classNames({
+                        'deskChecker': true,
+                        'checker-white': checker === 1,
+                        'checker-black': checker === 0,
+                        'checker-active': (activeChecker === activeLineId) && (checkKey === line.length - 1)
+                      })
+
+                      return <div
+                        key={checkKey}
+                        className={checkerClasses}
+                      >
+                        {checker}
+                      </div>
+                    })}
+                </div>
+                </span>
+              )
+            })}
+          </div>
+        )
+      })}
+      {deskSeparator(blackDesk).map((aside, asideKey) => {
+        return (
+          <div key={asideKey} className="deskAsideBlack">
             {aside.map((line, key) => {
               const separator = key === 6 ? <div className="deskSep"/> : null
               let handleCheckChecker = () => false
@@ -67,25 +132,6 @@ export function Desk(props) {
                       >
                         {checker}
                       </div>
-                    })}
-                </div>
-                </span>
-              )
-            })}
-          </div>
-        )
-      })}
-      {deskSeparator(blackDesk).map((aside, asideKey) => {
-        return (
-          <div key={asideKey} className="deskAsideBlack">
-            {aside.map((line, key) => {
-              const separator = key === 6 ? <div className="deskSep"/> : null
-              return (
-                <span key={key}>
-                {separator}
-                  <div className="deskLine">
-                    {line.map((checker, checkerKey) => {
-                      return <div key={checkerKey} className="deskChecker">{checker}</div>
                     })}
                 </div>
                 </span>

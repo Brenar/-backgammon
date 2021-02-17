@@ -33,11 +33,11 @@ export const ReducerRecord = {
     [],
     [],
     [],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [],
     [],
     [],
-    [],
+    [0],
     [],
     [],
     [],
@@ -60,7 +60,7 @@ export const ReducerRecord = {
     [],
     [],
     [],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [],
     [],
     [],
@@ -73,8 +73,8 @@ export const ReducerRecord = {
     [],
     [],
   ],
-  points: [2, 3],
-  turn: 'black', // or white
+  points: [3, 2],
+  turn: 'white', // or white
 }
 
 export default function reducer(state = ReducerRecord, action) {
@@ -159,7 +159,9 @@ export const blackDeskSelector = createSelector(
 export const blackScoreSelector = createSelector(stateSelector, (state) => {
   let count = 0
   state.deskForBlack.map((line) => {
-    return line.map((point) => count = count + point)
+    line.map((point) => {
+      count = count + point
+    })
   })
   return count
 })
@@ -167,7 +169,9 @@ export const blackScoreSelector = createSelector(stateSelector, (state) => {
 export const whiteScoreSelector = createSelector(stateSelector, (state) => {
   let count = 0
   state.deskForWhite.map((line) => {
-    return line.map((point) => count = count + point)
+    line.map((point) => {
+      count = count + point
+    })
   })
   return count
 })
@@ -191,18 +195,11 @@ export const handleRollTheDices = () => ({
   payload: getRandomDices(),
 })
 
-// export const handleMoveChecker = (desk) => ({
-//   type: MOVE_CHECKER_REQUEST,
-//   payload: desk,
-// })
+export const handleMoveChecker = (desk) => ({
+  type: MOVE_CHECKER_REQUEST,
+  payload: desk,
+})
 
-export const handleMoveChecker = (desk) => (dispatch, getState) => {
-
-  dispatch({
-    type: MOVE_CHECKER_REQUEST,
-    payload: desk
-  })
-}
 
 export const handleChangeTurn = () => ({
   type: CHANGE_TURN_REQUEST,
