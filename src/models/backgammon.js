@@ -86,20 +86,20 @@ export default function reducer(state = ReducerRecord, action) {
     case ROLL_THE_DICES:
       return Object.assign(
         {},
+        state,
         {
           points: payload,
         }
       )
-    case MOVE_CHECKER_SUCCESS:
-      const deskData =
-        state.turn === 'black'
-          ? { deskForBlack: payload }
-          : { deskForWhite: payload }
-      return Object.assign({}, deskData)
+    case MOVE_CHECKER_REQUEST:
+      const deskData = state.turn === 'black' ? { deskForBlack: payload } : { deskForWhite: payload }
+      console.log(deskData)
+      return Object.assign({}, state, deskData)
     case CHANGE_TURN_SUCCESS:
       const currentTurn = state.turn === 'black' ? 'white' : 'black'
       return Object.assign(
         {},
+        state,
         {
           turn: currentTurn,
         }
@@ -190,17 +190,16 @@ export const initStartGame = () => (dispatch, getState) => ({
   type: GAME_START,
 })
 
-export const handleRollTheDices = () => ({
+export const onRollTheDices = () => ({
   type: ROLL_THE_DICES,
   payload: getRandomDices(),
 })
 
-export const handleMoveChecker = (desk) => ({
+export const onMoveChecker = (desk) => ({
   type: MOVE_CHECKER_REQUEST,
   payload: desk,
 })
 
-
-export const handleChangeTurn = () => ({
+export const onChangeTurn = () => ({
   type: CHANGE_TURN_REQUEST,
 })

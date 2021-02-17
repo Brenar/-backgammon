@@ -50,7 +50,7 @@
       background-color: rgb(192, 186, 160);
       border: 2px outset rgb(148, 147, 135);
       border-radius: 8px;
-      
+
       .deskChecker {
         display: flex;
         font-weight: 500;
@@ -60,7 +60,7 @@
         height: 18px;
         justify-content: center;
         align-items: center;
-        cursor:pointer;
+        cursor: pointer;
       }
 
       .checker-white {
@@ -70,7 +70,7 @@
 
       .checker-black {
         background-color: #111;
-        color:#ddd;
+        color: #ddd;
       }
 
       .checker-active {
@@ -78,9 +78,11 @@
         opacity: 0.5;
       }
     }
+
     .line-active {
-        background-color: rgb(175, 201, 140);
-      }
+      background-color: rgb(175, 201, 140);
+      cursor:pointer;
+    }
   }
 
   .deskAsideBlack {
@@ -124,8 +126,6 @@
       border-radius: 8px;
 
 
-
-    
       .deskChecker {
         display: flex;
         font-weight: 500;
@@ -135,7 +135,7 @@
         height: 18px;
         justify-content: center;
         align-items: center;
-        cursor:pointer;
+        cursor: pointer;
       }
 
       .checker-white {
@@ -145,7 +145,7 @@
 
       .checker-black {
         background-color: #111;
-        color:#ddd;
+        color: #ddd;
       }
 
       .checker-active {
