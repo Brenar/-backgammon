@@ -81,7 +81,7 @@
 
     .line-active {
       background-color: rgb(175, 201, 140);
-      cursor:pointer;
+      cursor: pointer;
     }
   }
 
@@ -97,7 +97,7 @@
     padding: 5px 15px 0 15px;
     border-bottom: 5px solid rgb(31, 31, 27);
 
-    &:nth-child(4) {
+    &:nth-child(2) {
       margin-bottom: 95px;
 
       .deskLine {
@@ -125,7 +125,6 @@
       border: 2px outset rgb(148, 147, 135);
       border-radius: 8px;
 
-
       .deskChecker {
         display: flex;
         font-weight: 500;
@@ -152,6 +151,11 @@
         border-style: dashed;
         opacity: 0.5;
       }
+    }
+
+    .line-active {
+      background-color: rgb(175, 201, 140);
+      cursor: pointer;
     }
   }
 }

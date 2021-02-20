@@ -37,7 +37,7 @@ export const ReducerRecord = {
     [],
     [],
     [],
-    [0],
+    [],
     [],
     [],
     [],
@@ -62,8 +62,8 @@ export const ReducerRecord = {
     [],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [],
-    [],
-    [],
+    [1],
+    [1],
     [],
     [],
     [],
@@ -195,10 +195,13 @@ export const onRollTheDices = () => ({
   payload: getRandomDices(),
 })
 
-export const onMoveChecker = (desk) => ({
+export const onMoveChecker = (desk) => (dispatch, getState) => {
+  dispatch({
   type: MOVE_CHECKER_REQUEST,
   payload: desk,
-})
+  })
+}
+
 
 export const onChangeTurn = () => ({
   type: CHANGE_TURN_REQUEST,

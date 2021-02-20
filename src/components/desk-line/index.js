@@ -10,16 +10,16 @@ import {
 } from '../../models/backgammon'
 
 const DeskLine = ({
-                    activeLines,
-                    handleCheckChecker,
-                    activeChecker,
-                    activeLineId,
-                    DeskKey,
-                    line,
-                    onMoveChecker,
-                    turn,
-                    blackDesk,
-                    whiteDesk
+  activeLines,
+  handleCheckChecker,
+  activeChecker,
+  activeLineId,
+  DeskKey,
+  line,
+  onMoveChecker,
+  turn,
+  blackDesk,
+  whiteDesk
 }) => {
   const isActiveLine = activeLines.includes(activeLineId)
   const separator = DeskKey === 6 ? <div className="deskSep"/> : null
@@ -38,6 +38,21 @@ const DeskLine = ({
         line.push(turn === 'black' ? 0 : 1)
       }
     })
+    let empty = []
+    if(turn === 'black') {
+      for(let i = 0; i < activeDesk.length; i++) {
+        if(activeDesk[i][0] === 1) {
+          activeDesk[i] = empty
+        }
+      }
+    }
+    if(turn === 'white') {
+      for(let i = 0; i < activeDesk.length; i++) {
+        if(activeDesk[i][0] === 0) {
+          activeDesk[i] = empty
+        }
+      }
+    }
     console.log(activeDesk)
     onMoveChecker(activeDesk)
   }
