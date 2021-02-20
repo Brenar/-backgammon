@@ -4,24 +4,30 @@ import './style.scss'
 import classNames from 'classnames'
 import {
   blackDeskSelector,
+  pointsSelector,
   onMoveChecker,
   turnSelector,
   whiteDeskSelector,
 } from '../../models/backgammon'
 
+
+
 const DeskLine = ({
   activeLines,
+  setActiveLines,
   handleCheckChecker,
   activeChecker,
-  activeLineId,
+  checkedLineId,
   DeskKey,
   line,
   onMoveChecker,
   turn,
+  points,
   blackDesk,
   whiteDesk
 }) => {
-  const isActiveLine = activeLines.includes(activeLineId)
+  const isActiveLine = activeLines.map(item => item.lineId).includes(checkedLineId)
+  const activePointsLine = activeLines.find(f => f.lineId === checkedLineId)
   const separator = DeskKey === 6 ? <div className="deskSep"/> : null
   const lineClasses = classNames({
     'deskLine': true,
@@ -34,7 +40,7 @@ const DeskLine = ({
       if((key + 1) === activeChecker) {
         line.pop()
       }
-      if((key + 1) === activeLineId) {
+      if((key + 1) === checkedLineId) {
         line.push(turn === 'black' ? 0 : 1)
       }
     })
@@ -54,7 +60,9 @@ const DeskLine = ({
       }
     }
     console.log(activeDesk)
-    onMoveChecker(activeDesk)
+    // TODO: добавить условие, при котором мы сходили на 2, или на 3, то убирать ход на 5
+    setActiveLines(activeLines.filter(f => f.point !== activePointsLine.point && points[0] + points[1] !== activePointsLine.point))
+    onMoveChecker(activeDesk, activePointsLine.point)
   }
 
   return (
@@ -66,7 +74,7 @@ const DeskLine = ({
             'deskChecker': true,
             'checker-white': checker === 1,
             'checker-black': checker === 0,
-            'checker-active': (activeChecker === activeLineId) && (checkKey === line.length - 1)
+            'checker-active': (activeChecker === checkedLineId) && (checkKey === line.length - 1)
           })
           return <div
             key={checkKey}
@@ -84,4 +92,5 @@ export default connect((state) => ({
   whiteDesk: whiteDeskSelector(state),
   blackDesk: blackDeskSelector(state),
   turn: turnSelector(state),
+  points: pointsSelector(state),
 }), {onMoveChecker})(DeskLine)
