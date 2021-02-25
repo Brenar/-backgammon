@@ -100,7 +100,7 @@ export default function reducer(state = ReducerRecord, action) {
         deskData,
         {points : state.points.filter(f => payload[1] !== f && payload[1] !== state.points[0] + state.points[1])
         })
-    case CHANGE_TURN_SUCCESS:
+    case CHANGE_TURN_REQUEST:
       const currentTurn = state.turn === 'black' ? 'white' : 'black'
       return Object.assign(
         {},
@@ -129,7 +129,7 @@ export const whiteDeskSelector = createSelector(
     const result = []
     const whiteDesk = state.deskForWhite
     const blackDesk = state.deskForBlack
-
+/* eslint-disable */
     whiteDesk.map((whiteLine, whiteKey) => {
       let blackTemp = []
       blackDesk.map((blackLine, blackKey) => {       
@@ -142,6 +142,7 @@ export const whiteDeskSelector = createSelector(
     return result
   } 
 )
+
 export const blackDeskSelector = createSelector(
   stateSelector,
   (state) => {
@@ -180,7 +181,7 @@ export const whiteScoreSelector = createSelector(stateSelector, (state) => {
   })
   return count
 })
-
+/* eslint-enable */
 export const turnSelector = createSelector(stateSelector, (state) => state.turn)
 export const pointsSelector = createSelector(
   stateSelector,
