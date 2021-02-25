@@ -69,8 +69,10 @@ const DeskLine = ({
     setActiveLines([])
     console.log(activePointsLine)
     onMoveChecker(activeDesk, activePointsLine.point)
-
   }
+
+
+
 /* eslint-enable */
   return (
     <span>

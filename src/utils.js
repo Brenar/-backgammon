@@ -9,3 +9,19 @@ export const getRandomDices = () => {
   }
   return arr
 }
+
+export const isImpossibleTurn = ({deskForWhite, deskForBlack, turn, points}) => {
+  // TODO fixes
+  let countTurns = 0
+  const desk = turn === 'white' ? deskForWhite : deskForBlack
+
+  desk && desk.map((line, lineId) => {
+    line && line.map((checker, checkerId) => {
+      if(checker > 0){
+
+      }
+    })
+  })
+
+  return countTurns === 0
+}
