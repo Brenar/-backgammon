@@ -6,10 +6,10 @@ import {
   blackDeskSelector,
   pointsSelector,
   onMoveChecker,
+  onChangeTurn,
   turnSelector,
   whiteDeskSelector,
 } from '../../models/backgammon'
-
 
 
 const DeskLine = ({
@@ -17,10 +17,12 @@ const DeskLine = ({
   setActiveLines,
   handleCheckChecker,
   activeChecker,
+  setActiveChecker,
   checkedLineId,
   DeskKey,
   line,
   onMoveChecker,
+  onChangeTurn,
   turn,
   points,
   blackDesk,
@@ -34,6 +36,7 @@ const DeskLine = ({
     'line-active': isActiveLine
   })
 
+/* eslint-disable */
   const handleMoveChecker = () => {
     const activeDesk = turn === 'black' ? blackDesk : whiteDesk
     activeDesk.map((line, key) => {
@@ -59,12 +62,16 @@ const DeskLine = ({
         }
       }
     }
-    console.log(activeDesk)
+    console.log(activePointsLine)
     // TODO: добавить условие, при котором мы сходили на 2, или на 3, то убирать ход на 5
     setActiveLines(activeLines.filter(f => f.point !== activePointsLine.point && points[0] + points[1] !== activePointsLine.point))
+    setActiveChecker(null)
+    setActiveLines([])
+    console.log(activePointsLine)
     onMoveChecker(activeDesk, activePointsLine.point)
-  }
 
+  }
+/* eslint-enable */
   return (
     <span>
       {separator}
@@ -93,4 +100,4 @@ export default connect((state) => ({
   blackDesk: blackDeskSelector(state),
   turn: turnSelector(state),
   points: pointsSelector(state),
-}), {onMoveChecker})(DeskLine)
+}), {onMoveChecker, onChangeTurn})(DeskLine)

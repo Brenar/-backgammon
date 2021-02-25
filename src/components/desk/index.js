@@ -30,6 +30,9 @@ const deskSeparator = (desk) => {
 
 
 export function Desk(props) {
+
+
+
   const {whiteDesk, blackDesk, blackScore, whiteScore, points, turn} = props
   return (
     <div className="Desk">
@@ -54,6 +57,7 @@ export function Desk(props) {
             turn={turn}
             points={points}
             desk={whiteDesk}
+            onChangeTurn={onChangeTurn}
           />
         )
       })}
