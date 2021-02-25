@@ -7,10 +7,8 @@ import {
   pointsSelector,
   onMoveChecker,
   turnSelector,
-  whiteDeskSelector,
+  deskSelector,
 } from '../../models/backgammon'
-
-
 
 const DeskLine = ({
   activeLines,
@@ -89,7 +87,7 @@ const DeskLine = ({
 }
 
 export default connect((state) => ({
-  whiteDesk: whiteDeskSelector(state),
+  whiteDesk: deskSelector(state),
   blackDesk: blackDeskSelector(state),
   turn: turnSelector(state),
   points: pointsSelector(state),

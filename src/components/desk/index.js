@@ -4,7 +4,7 @@ import './style.scss'
 import DeskAside from '../desk-aside'
 
 import {
-  whiteDeskSelector,
+  deskSelector,
   blackDeskSelector,
   blackScoreSelector,
   whiteScoreSelector,
@@ -63,7 +63,7 @@ export function Desk(props) {
 
 export default connect(
   (state) => ({
-    whiteDesk: whiteDeskSelector(state),
+    whiteDesk: deskSelector(state),
     blackDesk: blackDeskSelector(state),
     blackScore: blackScoreSelector(state),
     whiteScore: whiteScoreSelector(state),
