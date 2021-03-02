@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './style.scss'
 import DeskLine from '../desk-line'
-import handleCheckCheckerCarry from '../../utils'
+import {handleCheckCheckerCarry} from '../../utils'
 
 /* eslint-disable */
 
