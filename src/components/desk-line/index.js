@@ -3,14 +3,12 @@ import {connect} from 'react-redux'
 import './style.scss'
 import classNames from 'classnames'
 import {
-  blackDeskSelector,
   pointsSelector,
   onMoveChecker,
   onChangeTurn,
   turnSelector,
-  whiteDeskSelector,
+  deskSelector,
 } from '../../models/backgammon'
-
 
 const DeskLine = ({
   activeLines,
@@ -98,8 +96,8 @@ const DeskLine = ({
 }
 
 export default connect((state) => ({
-  whiteDesk: whiteDeskSelector(state),
-  blackDesk: blackDeskSelector(state),
+  whiteDesk: deskSelector(state),
+  //blackDesk: blackDeskSelector(state),
   turn: turnSelector(state),
   points: pointsSelector(state),
 }), {onMoveChecker, onChangeTurn})(DeskLine)

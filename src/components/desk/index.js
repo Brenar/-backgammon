@@ -4,8 +4,7 @@ import './style.scss'
 import DeskAside from '../desk-aside'
 
 import {
-  whiteDeskSelector,
-  blackDeskSelector,
+  deskSelector,
   blackScoreSelector,
   whiteScoreSelector,
   pointsSelector,
@@ -44,20 +43,7 @@ export function Desk(props) {
             key={asideKey}
             turn={turn}
             points={points}
-            desk={blackDesk}
-          />
-        )
-      })}
-      {deskSeparator(blackDesk).map((aside, asideKey) => {
-        return (
-          <DeskAside
-            asideData={aside}
-            asideKey={asideKey}
-            key={asideKey}
-            turn={turn}
-            points={points}
             desk={whiteDesk}
-            onChangeTurn={onChangeTurn}
           />
         )
       })}
@@ -67,8 +53,8 @@ export function Desk(props) {
 
 export default connect(
   (state) => ({
-    whiteDesk: whiteDeskSelector(state),
-    blackDesk: blackDeskSelector(state),
+    whiteDesk: deskSelector(state),
+    //blackDesk: blackDeskSelector(state),
     blackScore: blackScoreSelector(state),
     whiteScore: whiteScoreSelector(state),
     points: pointsSelector(state),

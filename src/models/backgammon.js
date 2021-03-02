@@ -120,48 +120,29 @@ export default function reducer(state = ReducerRecord, action) {
  * Selectors
  * */
 
-//TODO: create selectors
-
 export const stateSelector = (state) => state[moduleName]
-export const whiteDeskSelector = createSelector(
+
+export const deskSelector = createSelector(
   stateSelector,
-  (state) => {
+  state => {
     const result = []
-    const whiteDesk = state.deskForWhite
-    const blackDesk = state.deskForBlack
-/* eslint-disable */
-    whiteDesk.map((whiteLine, whiteKey) => {
-      let blackTemp = []
-      blackDesk.map((blackLine, blackKey) => {       
-        if (whiteKey === blackKey) {
-          blackTemp = blackLine
+    const mainDesk = state.turn === 'white' ? state.deskForWhite : state.deskForBlack
+    const secondaryDesk = state.turn === 'white' ? state.deskForBlack : state.deskForWhite
+
+    mainDesk.map((mainLine, mainKey) => {
+      let temp = []
+      secondaryDesk.map((secondaryLine, secondaryKey) => {
+        if (mainKey === secondaryKey) {
+          temp = secondaryLine
         }
       })
-      result.push(whiteLine.concat(blackTemp))
+      result.push(mainLine.concat(temp))
     })
     return result
   } 
 )
 
-export const blackDeskSelector = createSelector(
-  stateSelector,
-  (state) => {
-    const result = []
-    const whiteDesk = state.deskForWhite
-    const blackDesk = state.deskForBlack
 
-    blackDesk.map((blackLine, blackKey) => {
-      let whiteTemp = []
-      whiteDesk.map((whiteLine, whiteKey) => {       
-        if (blackKey === whiteKey) {
-          whiteTemp = whiteLine
-        }
-      })
-      result.push(blackLine.concat(whiteTemp))
-    })
-    return result
-  } 
-)
 export const blackScoreSelector = createSelector(stateSelector, (state) => {
   let count = 0
   state.deskForBlack.map((line) => {
